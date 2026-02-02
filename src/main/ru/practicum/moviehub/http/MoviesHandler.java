@@ -103,6 +103,7 @@ public class MoviesHandler extends BaseHttpHandler {
                         new ErrorResponse("Bad Request", "Тело запроса пустое"));
                 return;
             }
+
             JsonObject jsonObject;
             try {
                 jsonObject = gson.fromJson(body, JsonObject.class);
@@ -111,6 +112,7 @@ public class MoviesHandler extends BaseHttpHandler {
                         new ErrorResponse("Bad Request", "Некорректный JSON формат"));
                 return;
             }
+
             if (!jsonObject.has("name") || !jsonObject.has("year")) {
                 sendJson(ex, 400,
                         new ErrorResponse("Bad Request", "Отсутствуют обязательные поля: name, year"));
@@ -133,7 +135,7 @@ public class MoviesHandler extends BaseHttpHandler {
 
         if (path.startsWith("/movies/")) {
             try {
-                Integer id = getIdFromExchange(ex);
+                int id = getIdFromExchange(ex);
                 if (!moviesStore.containsMovie(id)) {
                     sendJson(ex, 404, new ErrorResponse("Not Found", "Фильм не найден"));
                     return;
