@@ -3,6 +3,7 @@ package ru.practicum.moviehub.http;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import ru.practicum.moviehub.api.HttpStatusCode;
 
 import java.io.OutputStream;
 import java.io.IOException;
@@ -32,7 +33,7 @@ abstract class BaseHttpHandler implements HttpHandler {
 
     protected void sendNoContent(HttpExchange ex) throws java.io.IOException {
         ex.getResponseHeaders().set("Content-Type", CT_JSON);
-        ex.sendResponseHeaders(204, -1);
+        ex.sendResponseHeaders(HttpStatusCode.NO_CONTENT, -1);
     }
 
     protected int getIdFromExchange(HttpExchange ex) {
